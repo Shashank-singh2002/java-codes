@@ -1,0 +1,15 @@
+package com.HarryProject;
+
+public class textreplace {
+	public static void main(String[] args)
+	{
+		String Bitches = "Hi <|name|>, fuck you";
+		Bitches = Bitches.replace("name","anjali");
+		System.out.println(Bitches);
+		
+		
+		
+		
+	}
+
+}
