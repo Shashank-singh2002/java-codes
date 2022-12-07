@@ -1,0 +1,27 @@
+public class Percentage {
+public static void main(String[] args) {
+	int percentage = 5;
+	if(percentage>=75 && percentage<=100)
+	{
+		System.out.println("A");
+	}
+	else if(percentage>=60 && percentage<=100)
+	{
+		System.out.println("B");
+	}
+	else if(percentage>=45 && percentage<=60)
+	{
+		System.out.println("C");
+	}
+	else if(percentage>=35 && percentage<=45)
+	{
+		System.out.println("D");
+	}
+	else if(percentage>=0 && percentage<=35)
+	{
+		System.out.println("Fail");
+	}
+	
+}
+
+}
