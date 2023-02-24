@@ -1,0 +1,37 @@
+
+class Solution {
+public:
+    int dp[(1<<10)+5],sta[1005],tot;
+    int pri[10]={2,3,5,7,11,13,17,19,23,29};
+    int squareFreeSubsets(vector<int>& nums) {
+        int Mod=1e9+7,ans=0;
+        for(int x:nums)
+        {
+            int now=x;
+            int cur=0;
+            bool ok=1;
+            for(int i=0;i<10;i++)
+            {
+                if(now%pri[i])
+                    continue;
+                int cnt=0;
+                while(now%pri[i]==0)
+                    now/=pri[i],cnt++;
+                if(cnt>=2)
+                    ok=0;
+                cur^=(1<<i);
+            }
+            if(!ok)
+                continue;
+            sta[++tot]=cur;
+        }
+        dp[0]=1;
+        for(int i=1;i<=tot;i++)
+            for(int j=(1<<10)-1;j>=0;j--)
+                if((j&sta[i])==sta[i])
+                    dp[j]=(dp[j]+dp[j^sta[i]])%Mod;
+        for(int j=0;j<(1<<10);j++)
+            ans=(ans+dp[j])%Mod;
+        return (ans-1+Mod)%Mod;
+    }
+};
