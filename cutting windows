@@ -1,0 +1,10 @@
+class solution{
+public:
+    
+    vector<long long int> minimumSquares(long long int L, long long int B)
+    {
+        long long int ans = __gcd(L,B);
+        vector<long long int> res = {(L * B) / pow(ans, 2), ans};
+        return res;
+    }
+};
