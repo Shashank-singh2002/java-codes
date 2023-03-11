@@ -1,0 +1,44 @@
+package git;
+
+
+
+import java.util.Scanner;
+import java.util.Random;
+public class randomguess {
+
+
+
+
+
+
+    public static void main(String args[]) {
+        
+    	Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+
+    	
+        Random rand = new Random();
+
+        int a = rand.nextInt();
+
+      
+
+   
+
+
+	
+if(a == n) {
+	System.out.println("u r right");
+	
+}
+if(a == n-4 || a == n-3  || a == n-2 || a == n-1 ) {
+	System.out.println("nice aage chl ");
+}
+if(a == n+4|| a == n+3 ||  a == n+2 || a == n+1 ) {
+	System.out.print("piche chl");
+}
+else {
+	System.out.print("eww");
+}
+}
+}
