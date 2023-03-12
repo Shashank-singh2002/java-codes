@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> findMaxRow(vector<vector<int>> mat, int N) {
+         int i=0,j=N-1;
+
+        int ans=0;
+
+        while(i<N&&j>=0)
+
+        {
+
+            if(mat[i][j]==1)
+
+            {
+
+                ans=i;
+
+                j--;
+
+            }
+
+            else
+
+            i++;
+
+        }
+
+        return {ans,N-j-1};
+    }
+};
