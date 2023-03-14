@@ -1,0 +1,47 @@
+class Solution{
+    //Complete the function and return minimum number of operations
+    public:
+    int specialPalindrome(string s1, string s2){
+        string temp=s1;
+        int n=s1.size(),m=s2.size(),mn=INT_MAX;
+        for(int i=0; i<=n-m; ++i) {
+            temp=s1;
+            int ans=0,k=0;
+            for(int j=i; j<i+m; ++j) {
+                if(temp[j]!=s2[k]) {
+                    ans++;
+                    temp[j]=s2[k];
+                }
+                k++;
+            }
+            int l=0,h=n-1,ch=0;
+            while(l<h) {
+                if(l<i and h>i+m-1) {
+                    if(temp[l]!=temp[h]) {
+                        ans++;
+                    }
+                    l++,h--;
+                }
+                else {
+                    if((l<i and h<=i+m-1) or (l>=i and h>i+m-1)) {
+                        if(temp[l]!=temp[h]) {
+                            ans++;
+                        }
+                    }
+                    else {
+                        if(temp[l]!=temp[h]) {
+                            ch=1;
+                            break;
+                        }
+                    }
+                    l++,h--;
+                }
+            }
+            if(ch==0) {
+                mn=min(ans,mn);
+            }
+        }
+        if(mn==INT_MAX)return -1;
+        return mn;
+    }
+};
