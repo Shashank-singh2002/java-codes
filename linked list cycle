@@ -1,0 +1,15 @@
+public class Solution {
+  public boolean hasCycle(ListNode head) {
+    ListNode sloth = head;
+    ListNode flash = head;
+
+    while (flash != null && flash.next != null) {
+      sloth = sloth.next;
+      flash = flash.next.next;
+      if (sloth == flash)
+        return true;
+    }
+
+    return false;
+  }
+}
