@@ -1,0 +1,86 @@
+class Solution{   
+public:
+    long long solve(int X,int Y,string S){
+      stack<char>st;
+        long long int c=0,d=0,max1,max2;
+        for(int i=0; i<S.size(); i++)
+        {
+            if(S[i]=='p')
+            {
+                if(st.empty())
+                st.push(S[i]);
+                else if(st.top()=='r')
+                {
+                    c++;
+                    st.pop();
+                }
+                else
+                st.push(S[i]);
+            }
+            else
+            st.push(S[i]);
+        }
+        stack<char>st2;
+        while(st.empty()==0)
+        {
+            if(st.top()=='p')
+            {
+                if(st2.empty())
+                st2.push(st.top());
+                else if(st2.top()=='r')
+                {
+                    d++;
+                    st2.pop();
+                }
+                else
+                st2.push(st.top());
+            }
+            else
+            st2.push(st.top());
+            st.pop();
+        }
+        max1=d*X+c*Y;
+        while(st.empty()==0)
+        st.pop();
+        while(st2.empty()==0)
+        st2.pop();
+        c=0,d=0;
+        for(int i=0; i<S.size(); i++)
+        {
+            if(S[i]=='r')
+            {
+                if(st.empty())
+                st.push(S[i]);
+                else if(st.top()=='p')
+                {
+                    c++;
+                    st.pop();
+                }
+                else
+                st.push(S[i]);
+            }
+            else
+            st.push(S[i]);
+        }
+        while(st.empty()==0)
+        {
+            if(st.top()=='r')
+            {
+                if(st2.empty())
+                st2.push(st.top());
+                else if(st2.top()=='p')
+                {
+                    d++;
+                    st2.pop();
+                }
+                else
+                st2.push(st.top());
+            }
+            else
+            st2.push(st.top());
+            st.pop();
+        }
+        max2=d*Y+c*X;
+        return max(max1,max2);
+    }
+};
