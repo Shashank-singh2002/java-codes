@@ -1,0 +1,37 @@
+#define ll long long int
+class Solution{
+    
+     Shop shop;
+    public:
+    Solution(Shop s)
+    {
+        this->shop = s;
+    }
+    long long find(int n, long k){
+        ll low=0,mid,high=n-1,curPrice,price,j,x,count=0;
+        while(k>0)
+        {
+            price = -1;
+            while(low<=high)
+            {
+                mid = low + (high-low)/2;
+                curPrice = shop.get(mid);
+                if(curPrice<=k)
+                {
+                    price = curPrice;
+                    j = mid;
+                    low = mid+1;
+                }
+                else
+                    high = mid-1;
+            }
+            if(price==-1)
+                break;
+            x = k/price;
+            count += x;
+            k -= (x*price);
+            low = 0,high=j-1;
+        }
+        return count;
+    }
+};
