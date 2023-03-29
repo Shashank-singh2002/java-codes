@@ -1,0 +1,19 @@
+class Solution
+{
+    public:
+    int countSubstring(string S)
+    {
+        int n= S.size();
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            int cntl=0;
+            int cntu=0;
+            for(int j=i;j<n;j++){
+                if(S[j]>='a' and S[j]<='z') cntl++;
+                else cntu++;
+                if(cntl == cntu) cnt++;
+            }
+        }
+        return cnt;
+    }
+};
