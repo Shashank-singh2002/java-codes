@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    long long int minOperations(int N) {
+          if(N == 1) return 1;
+
+        long long int mid;
+        long long int res;
+        if(N%2!=0)
+        {
+            mid=N/2;
+            res=mid*(mid+1);
+        }
+        else
+        {
+            mid=N/2;
+           res=mid*mid;
+        }
+        return res;
+    }
+};
