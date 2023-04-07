@@ -1,0 +1,43 @@
+public static int addMinChar(String str){
+    //code here
+    
+    int n = str.length();
+    int left = 0;
+    int i = 2;
+    int right = n-1;
+    int idx = 0;
+    boolean marked = false;
+    boolean answer = true;
+    int rht = 0;
+    while(marked == false){
+  
+      rht = right;
+        while(left <= right && answer){
+            char ch1 = str.charAt(left);
+            char ch2 = str.charAt(right);
+            
+            if(ch1 == ch2){
+                left++;
+                right--;
+            }
+            else if(ch1 != ch2){
+                answer = false;
+            }
+        }
+        
+        if(answer == true){
+            marked = true;
+            idx = rht+1;
+            break;
+        }else{
+            answer = true;
+        }
+        
+        left = 0;
+        right = n-i;
+        i++;
+    }
+    
+    return n - idx;
+    
+  }
