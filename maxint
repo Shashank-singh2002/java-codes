@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    int maxIntersections(vector<vector<int>> lines, int N) {
+        map<int, int> mp;
+        for(int i=0; i<N; i++){
+            mp[lines[i][0]]++;
+            mp[lines[i][1]+1]--;
+        }
+        int ans = 0, sum = 0;
+        for(auto it : mp){
+            sum += it.second;
+            ans = max(ans, sum);
+        }
+        return ans;
+    }
+};
