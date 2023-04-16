@@ -1,0 +1,37 @@
+class Solution {
+  public:
+    long long solve(int N, vector<int> &A, vector<int> &B) {
+        sort(A.begin(),A.end());
+        sort(B.begin(),B.end(),greater<int>());
+        
+        long long ans=0,diff=0;
+        vector<int>odd,even;
+
+        for(int i=0;i<N;i++){
+            if(B[i]%2==0)
+            even.push_back(B[i]);
+            
+            else
+            odd.push_back(B[i]);
+        }
+
+        for(int i=0;i<N;i++){
+            if(A[i]%2==0){
+                if(even.size()==0) return -1;
+                
+                diff+=even.back()-A[i];
+                ans+=abs(even.back()-A[i])/2;
+                even.pop_back();
+            }
+            else{
+                if(odd.size()==0) return -1;
+                
+                diff+=odd.back()-A[i];
+                ans+=abs(odd.back()-A[i])/2;
+                odd.pop_back();
+            }
+        }
+        if(diff!=0) return -1;
+        return ans/2;
+    }
+};
