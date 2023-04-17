@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        int n = candies.size();
+
+        int ma = candies[0];
+        for (int i = 1; i < n; i++)
+            ma = max(ma, candies[i]);
+
+        vector<bool> ans(n, false);
+        for (int i = 0; i < n; i++)
+            if (candies[i] + extraCandies >= ma)
+                ans[i] = true;
+
+        return ans;
+    }
+};
+
+作者：wzc1995
+链接：https://www.acwing.com/file_system/file/content/whole/index/content/513391/
+来源：AcWing
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
