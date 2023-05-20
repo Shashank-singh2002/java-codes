@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    bool isStraightHand(int N, int groupSize, vector<int> &hand) {
+        if(N%groupSize) return false;
+        
+        map<int,int> mp;
+        for(int i = 0;i<N;i++){
+            mp[hand[i]]++;
+        }
+        
+        for(auto it: mp){
+            if(it.second == 0) continue;
+            int x = it.first;
+            for(int i = 0;i<groupSize;i++){
+                if(mp[x+i] == 0) return false;
+                mp[x+i]--;
+            }
+        }
+        return true;
+    }
+};
