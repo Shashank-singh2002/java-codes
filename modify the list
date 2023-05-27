@@ -1,0 +1,38 @@
+class Solution{
+    public:
+    struct Node* modifyTheList(struct Node *head)
+    {
+      vector<int>a;
+        vector<int>b;
+        struct Node*p=head;
+        int count=0;
+        while(p!=NULL)
+        {
+            a.push_back(p->data);
+            b.push_back(p->data);
+            p=p->next;
+            count++;
+        }
+        reverse(b.begin(),b.end());
+        struct Node*q=head;
+        int i=0;
+        while(q!=NULL)
+        {
+            if(i<count/2)
+            {
+                q->data=b[i]-a[i];
+                i++;
+                q=q->next;
+            }
+            else
+            {
+                q->data=b[i];
+                i++;
+                q=q->next;
+            }
+                      
+        }
+        return head;  
+        //add code here.
+    }
+};
