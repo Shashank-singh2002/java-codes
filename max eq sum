@@ -1,0 +1,38 @@
+class Solution{
+public:
+    int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
+        int a=0,b=0,c=0;
+        int i=0,j=0,k=0;
+        
+        while(i<N1) {
+            a+=S1[i++];
+        }
+         while(j<N2) {
+            b+=S2[j++];
+        }
+         while(k<N3) {
+            c+=S3[k++];
+        }
+
+         i=0,j=0,k=0;
+        while(i<N1 && j<N2&& k<N3){
+            int maxi=max(a,max(b,c));
+
+            if(a==maxi && b==maxi && a==c) return a;
+            
+            if(maxi==a) {
+                a-=S1[i];
+                i++;
+            }
+            if(maxi==b) {
+                b-=S2[j];
+                j++;
+            }
+            if(maxi==c) {
+                c-=S3[k];
+                k++;
+            }
+        }
+        return 0;
+    }
+};
