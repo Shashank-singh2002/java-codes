@@ -1,0 +1,30 @@
+class Solution
+{
+    public:
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        pre = NULL;
+        suc = NULL;
+        
+        Node* curr1 = root;
+        Node* curr2 = root;
+        
+        while(curr1 || curr2){
+            if(curr1 && curr1->key >= key){
+              curr1 = curr1->left;
+            }
+            else if(curr1 && curr1->key < key){
+              pre = curr1;
+              curr1 = curr1->right;
+            }
+            
+            if(curr2 && curr2->key <= key){
+                curr2 = curr2->right;
+            }  
+            else if(curr2 && curr2->key > key){
+              suc = curr2;
+              curr2 = curr2->left;
+            }
+            }
+        }
+};
