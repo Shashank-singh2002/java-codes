@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    vector<int> leastPrimeFactor(int n) {
+    vector<int>v;
+    int f=0;
+    for(int i=0;i<=n;i++){
+        for(int j=2;j<=i/2;j++){
+            if(i%j==0){
+                v.push_back(j);
+                f=1;
+                break;
+            }
+                
+        }
+        if(f==0)
+            v.push_back(i);
+        f=0;
+    }
+    return v;
+    }
+};
