@@ -1,0 +1,16 @@
+class Solution{
+  public:
+    int cutRod(int price[], int n) {
+        vector<int> Costs(n+1,0);
+        for(int size=1 ; size <= n ; size++)
+        {
+            int out = 0 ;
+            for(int i=1 ; i <= size ; i++)
+            {
+                out = max(out , price[i-1] + Costs[size - i]);
+            }
+            Costs[size] = out;
+        }
+        return Costs[n];
+    }
+};
