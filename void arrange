@@ -1,0 +1,23 @@
+class Solution{
+    public:
+    
+    //with O(1) extra space.
+    void arrange(long long arr[], int n) {
+       for(int i = 0 ; i < n ; i++){
+            long long temp = arr[arr[i]];
+            if(temp > n){
+                arr[i] += (temp%n)*n;
+            }
+            else{
+                arr[i]+=(temp*n);
+            }
+        }
+        for(int i = 0 ; i < n ; i++){
+            arr[i]/=n;
+            if(arr[i]==n){
+                arr[i] = 0;
+            }
+        }
+        
+    }
+};
