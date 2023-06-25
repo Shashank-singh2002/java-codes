@@ -1,0 +1,20 @@
+class Solution
+{
+    public:
+    // #define MAX 1000
+    vector<vector<int>> uniqueRow(int M[MAX][MAX],int row,int col)
+    {
+        vector<vector<int>> ans;
+        
+        for(int i=0;i<row;i++){
+            vector<int> temp1(col);
+            for(int j=0;j<col;j++){
+                temp1[j] = M[i][j];
+            }
+            if(find(ans.begin(), ans.end(), temp1) == ans.end()){
+            ans.push_back(temp1);
+            }
+        }
+        return ans;
+    }
+};
