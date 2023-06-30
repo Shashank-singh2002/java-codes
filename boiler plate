@@ -1,0 +1,8 @@
+class Solution{
+public:	
+		
+	int isDivisible(string s){
+	    //complete the function here
+	}
+
+}
