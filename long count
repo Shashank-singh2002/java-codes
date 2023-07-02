@@ -1,0 +1,24 @@
+class Solution {
+    public long continuousSubarrays(int[] nums) {
+         long count = 0;
+        int windowStart = 0;
+        int windowEnd = 0;
+        
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+
+        while (windowEnd < nums.length) {
+            maxHeap.offer(nums[windowEnd]);
+            minHeap.offer(nums[windowEnd]);
+            while (maxHeap.peek() - minHeap.peek() > 2) {
+                maxHeap.remove(nums[windowStart]);
+                minHeap.remove(nums[windowStart]);
+                windowStart++;
+            }
+            count += windowEnd*1L - windowStart*1L + 1L;
+            windowEnd++;
+        }
+
+        return count;
+    }
+}
