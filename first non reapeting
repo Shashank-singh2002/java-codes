@@ -1,0 +1,28 @@
+class Solution {
+ public:
+  string FirstNonRepeating(string A){
+      unordered_map<char, int> charCount;
+            vector<char> order;
+             string res = "";
+    for (char c : A) {
+        charCount[c]++;
+        if (charCount[c] == 1) {
+            order.push_back(c);
+        }
+        else {
+            auto it = find(order.begin(), order.end(), c);
+            if (it != order.end()) {
+                order.erase(it);
+            }
+        }
+        if (!order.empty()) {
+            res += order.front();
+        }
+        else {
+            res += "#";
+        }
+    }
+    return res;
+  }
+
+};
