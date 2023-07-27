@@ -1,0 +1,27 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] repeatedNumber(final int[] A) {
+    
+        int eor = 0;
+        for (int i = 1; i <= A.length; ++i) {
+            eor ^= (i ^ A[i - 1]);
+        }
+        int diff = eor & (~eor + 1);
+        int a = 0;
+        for (int i = 1; i <= A.length; ++i) {
+            if ((A[i - 1] & diff) == 0) {
+                a ^= A[i - 1];
+            }
+            if ((i & diff) == 0) {
+                a ^= i;
+            }
+        }
+        int b = eor ^ a;
+        for (int num : A) {
+            if (a == num) {
+                return new int[] {a, b};
+            }
+        }
+        return new int[] {b, a};
+    }
+}
