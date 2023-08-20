@@ -1,0 +1,64 @@
+class Solution {
+    public int longestEqualSubarray(List<Integer> nums, int k) {
+              int loww = 0, highh = nums.size();
+        int ans = 0;
+        
+        while (loww <= highh) {
+            int mid = loww + (highh - loww) / 2;
+            if (isValid(nums, k, mid)) {
+                loww = mid + 1;
+                ans = Math.max(ans, mid);
+            } else {
+                highh = mid - 1;
+            }
+        }
+        
+        return ans;
+    }
+    
+    private void remove(TreeMap<Integer, Integer> map, int k) {
+        if (map.get(k) == 1) {
+            map.remove(k);
+        } else {
+            map.put(k, map.get(k) - 1);
+        }
+    }
+
+    private void add(TreeMap<Integer, Integer> map, int k) {
+        map.put(k, map.getOrDefault(k, 0) + 1);
+    }
+
+    private boolean isValid(List<Integer> a, int k, int mid) {
+        if (mid == 0) return true;
+        mid += k;
+
+        List<Integer> fre = new ArrayList<>(a.size() + 1);
+        for (int i = 0; i <= a.size(); i++) {
+            fre.add(0);
+        }
+
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        
+        for (int i = 0; i < mid && i < a.size(); i++) {
+            if (fre.get(a.get(i)) != 0) remove(map, fre.get(a.get(i)));
+            fre.set(a.get(i), fre.get(a.get(i)) + 1);
+            add(map, fre.get(a.get(i)));
+        }
+
+        for (int i = 0, j = mid; j < a.size(); j++, i++) {
+            int left = mid - map.lastKey();
+            if (left <= k) return true;
+
+            remove(map, fre.get(a.get(i)));
+            fre.set(a.get(i), fre.get(a.get(i)) - 1);
+            if (fre.get(a.get(i)) != 0) add(map, fre.get(a.get(i)));
+
+            if (fre.get(a.get(j)) != 0) remove(map, fre.get(a.get(j)));
+            fre.set(a.get(j), fre.get(a.get(j)) + 1);
+            add(map, fre.get(a.get(j)));
+        }
+
+        int left = mid - map.lastKey();
+        return left <= k;
+    }
+}
