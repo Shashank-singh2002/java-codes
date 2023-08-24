@@ -1,0 +1,73 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> res = new ArrayList<>();
+        int left = 0;
+        
+        while (left < words.length) {
+            int right = findRight(left, words, maxWidth);
+            res.add(justify(left, right, words, maxWidth));
+            left = right + 1;
+        }
+        return res;
+    }
+    
+    private int findRight(int left, String[] words, int maxWidth) {
+        int right = left;
+        int sum = words[right].length();
+        right++;
+        
+        while (right < words.length && (sum + 1 + words[right].length()) <= maxWidth) {
+            sum += 1 + words[right].length();
+            right++;
+        }
+        return right - 1;
+    }
+    
+    private String justify(int left, int right, String[] words, int maxWidth) {
+        if (left == right) return padResult(words[left], maxWidth);
+        
+        Boolean isLastLine = false;
+        if (right == words.length -1) isLastLine = true;
+        
+        String space;
+        int remainder;
+        int numSpace = right - left;
+        int totalSpace = maxWidth - wordLength(left, right, words);
+        
+        if (isLastLine) {
+            space = " ";
+            remainder = 0;
+        } else {
+            space = blank(totalSpace/ numSpace);
+            remainder = totalSpace % numSpace;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = left; i <= right; i++) {
+            if (remainder > 0) {
+                sb.append(words[i]).append(space).append(" ");
+                remainder--;
+            } else {
+                sb.append(words[i]).append(space);
+            }
+        }
+        return padResult(sb.toString().trim(), maxWidth);
+        
+    }
+    
+    private int wordLength(int left, int right, String[] words) {
+        int wordLength = 0;
+        for (int i = left; i <= right; i++) {
+            wordLength += words[i].length();
+        }
+        return wordLength;
+    }
+    
+    private String padResult(String result, int maxWidth) {
+        return result + blank(maxWidth - result.length());
+    }
+    
+    private String blank(int length) {
+        return new String(new char[length]).replace('\0', ' ');
+    }
+}
