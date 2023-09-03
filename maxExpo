@@ -1,0 +1,17 @@
+        int maxExplodedBoxes = 0;
+        int count = 1;
+        
+        for (int i = 1; i < N; i++) {
+            if (col[i] == C) {
+                count++;
+                if (count >= 3) {
+                    maxExplodedBoxes += count - 2;
+                    count = 1;
+                }
+            } else {
+                count = 1;
+            }
+        }
+        
+        return maxExplodedBoxes;
+    }
