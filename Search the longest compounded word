@@ -1,0 +1,108 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class LongCompWords {
+    public static void main(String[] args) {
+        String filename = "";
+        String input1, input2;
+
+        // User choice for selecting files
+        System.out.println("Select the file (1 or 2) -->");
+        System.out.println("1. Input_01.txt");
+        System.out.println("2. Input_02.txt");
+        int n = 1; // You can change this to 2 to select the second file
+        switch (n) {
+            case 1:
+                filename = "Input_01.txt";
+                break;
+            case 2:
+                filename = "Input_02.txt";
+                break;
+            default:
+                System.out.println("Not an Valid Input");
+                System.exit(0);
+        }
+
+        System.out.println("\nOutput for Input file ( " + filename + " )----->");
+
+        long startTime = System.currentTimeMillis();
+        Pair<String, String> result = longCompWords(filename);
+        long endTime = System.currentTimeMillis();
+
+        double totalTime = (endTime - startTime) / 1000.0; // Time in seconds
+
+        System.out.println("Long comp word: " + result.getFirst());
+        System.out.println("Second long comp word: " + result.getSecond());
+        System.out.println("Time taken to process the input file: " + totalTime + " seconds");
+    }
+
+    public static Pair<String, String> longCompWords(String filename) {
+        List<String> words = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename)) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                words.add(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Error opening file: " + filename);
+            System.exit(1);
+        }
+
+        // Sort words by length in descending order
+        words.sort((a, b) -> Integer.compare(b.length(), a.length()));
+
+        Set<String> wordDictionary = new HashSet<>(words);
+
+        String firstLongWord = "";
+        String secondLongestWord = "";
+
+        for (String word : words) {
+            if (checkWordCompounded(wordDictionary, word)) {
+                if (firstLongWord.isEmpty()) {
+                    firstLongWord = word;
+                } else if (secondLongestWord.isEmpty()) {
+                    secondLongestWord = word;
+                    break;
+                }
+            }
+        }
+
+        return new Pair<>(firstLongWord, secondLongestWord);
+    }
+
+    public static boolean checkWordComp(Set<String> wordDictionary, String words) {
+        for (int i = 1; i < words.length(); i++) {
+            String firstWord = words.substring(0, i);
+            String remainingWord = words.substring(i);
+
+            if (wordDictionary.contains(firstWord) && (wordDictionary.contains(remainingWord) || checkWordComp(wordDictionary, remainingWord))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+class Pair<A, B> {
+    private A first;
+    private B second;
+
+    public Pair(A first, B second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    public A getFirst() {
+        return first;
+    }
+
+    public B getSecond() {
+        return second;
+    }
+}
