@@ -1,0 +1,20 @@
+class Solution
+{
+public:
+	int is_bleak(int n)
+	{
+	    int cnt=0;
+        for(int i=n-sqrt(n);i<=n;i++)
+        {
+            int a=i;
+            while(a>0)
+            {
+                if(a&1)
+                cnt++;
+                a=a>>1;
+            }
+           if(n==(i+cnt))
+           return 0;
+           cnt=0;
+        }
+        };
