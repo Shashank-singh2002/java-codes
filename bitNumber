@@ -1,0 +1,9 @@
+public int bitNumber(int x) {
+    int res = 0;
+    while (x != 0) {
+        int i = x & 1;
+        res += i;
+        x = x >> 1;
+    }
+    return res;
+}
