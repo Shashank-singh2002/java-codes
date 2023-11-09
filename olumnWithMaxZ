@@ -1,0 +1,16 @@
+int best = 0;
+        int ans = -1;
+        
+        for(int j = 0; j < N; j++){
+            int cur = 0;
+            
+            for(int i = 0; i < N; i++)
+                cur += arr[i][j] == 0;
+                
+            if(cur > best){
+                best = cur;
+                ans = j;
+            }
+        }
+        
+        return ans;
