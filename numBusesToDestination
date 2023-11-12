@@ -1,0 +1,62 @@
+import java.awt.Point;
+ 
+class Solution {	
+    public int numBusesToDestination(int[][] routes, int S, int T) {
+    	
+    	if(S==T) return 0;
+    	
+    	int n=routes.length;
+    	List<List<Integer>> graph=new ArrayList<>();
+    	
+    	for(int i=0;i<n;i++) {
+    		Arrays.parallelSort(routes[i]);
+    		graph.add(new ArrayList<>());
+    	}
+    	
+    	Set<Integer> st=new HashSet();
+    	Set<Integer> targets=new HashSet();
+    	Queue<Point> q=new LinkedList();
+    	
+    	for(int i=0;i<n;i++)
+    		for(int j=i+1;j<n;j++) {
+    			if(jud(routes[i],routes[j])) {
+	    			graph.get(i).add(j);
+	    			graph.get(j).add(i);
+    			}
+    		}
+    	
+    	for(int i=0;i<n;i++) {
+    		if(Arrays.binarySearch(routes[i], S)>=0) {
+    			st.add(i);
+    			q.add(new Point(i,1));
+    		}
+    		if(Arrays.binarySearch(routes[i], T)>=0)
+    			targets.add(i);
+    	}
+    	
+    	while(!q.isEmpty()) {
+    		Point now=q.poll();
+    		int node=now.x,depth=now.y;
+    		if(targets.contains(node))
+    			return depth;
+    		for(Integer next : graph.get(node)) {
+    			if(!st.contains(next)) {
+    				st.add(next);
+    				q.add(new Point(next,depth+1));
+    			}
+    		}
+    	}
+    	
+    	return -1;
+    }
+    
+    private boolean jud(int[] a,int[] b) {
+    	int i=0,j=0;
+    	while(i<a.length && j<b.length) {
+    		if(a[i]==b[j]) return true;
+    		if(a[i]<b[j]) i++;
+    		else j++;
+    	}
+    	return false;
+    }
+}
