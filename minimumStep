@@ -1,0 +1,11 @@
+class Solution{   
+public:
+    int minimumStep(int n){
+        int ans = 0;
+        while(n != 1) {
+            n = (n%3) ? n-1 : n/3;
+            ans++;
+        }
+        return ans;
+    }
+};
