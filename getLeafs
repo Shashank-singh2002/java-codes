@@ -1,0 +1,38 @@
+class Solution{
+  public:
+    void getLeafs(Node* root, vector<int> &leafs) {
+        if(!root) return;
+        
+        if(!root->left && !root->right)
+            leafs.push_back(root->data);
+        
+        getLeafs(root->left, leafs);
+        getLeafs(root->right, leafs);
+    }
+    
+    //Check for the DeadEnd node(node+1, node-1);
+    bool isPresent(Node* root, int data) {
+        if(!root) return false;
+        
+        if(data < root->data) {
+            isPresent(root->left, data);
+        }else if(data > root->data) {
+            isPresent(root->right, data);
+        }else {
+            return true;
+        }
+    }
+  
+    bool isDeadEnd(Node *root)
+    {
+        vector<int> leafs;
+        getLeafs(root, leafs);
+        
+        for(int leaf: leafs) {
+            if(leaf == 1) return true;
+            if(isPresent(root, leaf - 1) && 
+            isPresent(root, leaf + 1)) return true;
+        }
+        return false;
+    }
+};
