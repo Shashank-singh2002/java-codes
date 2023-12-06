@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    int countX(int L, int R, int X) {
+        int rem;
+        int ans=0;
+        int i=L+1;
+        int times =0;    
+            
+            while(i>0 && i<R){
+            rem = i%10;
+            if(rem==X){
+                ans++;
+            }
+            
+            i=i/10;
+          if(i==0){
+               
+                i=L+2+times ;
+                times++;
+                
+            }
+    }
+    
+    return ans;
+    }
+};
