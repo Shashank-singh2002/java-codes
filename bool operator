@@ -1,0 +1,40 @@
+class Pair {
+public:
+    int value;
+    int index;
+    
+    Pair(int value, int index) : value(value), index(index) {}
+    
+    <(const Pair& p) const {
+        return this->value < p.value;
+    }
+};
+
+class Solution{
+    public:
+      
+    int maxIndexDiff(int a[], int n) { 
+        // Your code here
+        
+        vector<Pair> list;
+        for(int i = 0; i < n; ++i)
+            list.push_back(Pair(a[i], i));
+        
+        sort(list.begin(), list.end());
+        
+        int ls = list.size();
+        int maxi_j = list[ls - 1].index;
+        int maxi = 0;
+        
+        for(int i = ls - 2; i >= 0; --i) {
+            if(list[i].index < maxi_j) {
+                maxi = max(maxi, maxi_j - list[i].index);
+            }
+            maxi_j = max(maxi_j, list[i].index);
+        }
+        
+        return maxi;
+        
+
+    }
+};
