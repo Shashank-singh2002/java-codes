@@ -1,0 +1,25 @@
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+      Arrays.sort(people);
+      //1223
+       int i = 0, j = people.length - 1, n = 0;
+        while (i <= j) {
+            if (people[i] + people[j] <= limit) i++;
+           n++;
+            j--;
+        }
+        return n;
+      
+      // HashMap<Integer,Integer> booty = new HashMap<>();
+       //int k = 0;
+      // int n = ; //2 4
+
+       //for(int i = 0 ; i<people.length; i++) {
+        //k = limit - people[i]; // 3-1 =2 3-3 =0 3-2 =1
+       // if(booty.containsKey(k)) //true
+         //   n--; //1
+        
+       //}
+      // return n; //1
+    }
+}
