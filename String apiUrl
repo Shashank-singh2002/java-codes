@@ -1,0 +1,36 @@
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+public class Collector {
+    private  ;
+
+    public Collector(String apiUrl) {
+        this.apiUrl = apiUrl;
+    }
+
+    public String collectData() throws IOException {
+        StringBuilder response = new StringBuilder();
+
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            Scanner scanner = new Scanner(conn.getInputStream());
+            while (scanner.hasNextLine()) {
+                response.append(scanner.nextLine());
+            }
+            scanner.close();
+        } else {
+            System.out.println("Failed: " + responseCode);
+        }
+        conn.disconnect();
+
+        return response.toString();
+    }
+
+   
+}
